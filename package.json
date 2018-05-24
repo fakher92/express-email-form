@@ -20,7 +20,8 @@
   "homepage": "https://github.com/fakher92/express-email-form#readme",
   "dependencies": {
     "dotenv": "^5.0.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"
