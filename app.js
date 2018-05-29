@@ -4,12 +4,27 @@ var fs = require('fs');
 const uuidv1 = require('uuid/v1');
 
 
+
 // Init App
 const app = express();
 
+app.set('view engine', 'pug');
 
-// Home Route
-app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
+
+// Confirmed Users Route
+app.get('/', (req, res) => {
+	res.render('home', { title: 'Home', message: 'Hello there!' })
+  })
+
+// Register Users Route
+app.get('/register', (req, res) => {
+	res.render('register', { title: 'Register', message: 'Hello there!' })
+  })
+
+// Admin Route
+app.get('/admin', (req, res) => {
+	res.render('admin', { title: 'Admin', message: 'Hello there!' })
+  })
 
 //==============
 app.get('/users/create', (req, res) => {
