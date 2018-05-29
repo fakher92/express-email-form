@@ -13,8 +13,19 @@ app.set('view engine', 'pug');
 
 // Confirmed Users Route
 app.get('/', (req, res) => {
-	res.render('home', { title: 'Home', message: 'Hello there!' })
-  })
+	console.log('rout /');
+	var arrayOfFiles = fs.readdirSync('./files/');
+	console.log(arrayOfFiles);
+	var confirmedUsers = [];
+	arrayOfFiles.forEach(file => {
+		var readFile = fs.readFileSync(`./files/${file}`);
+		let user = JSON.parse(readFile);
+		if(user.status == 'confirmed') {
+			confirmedUsers.push(user);
+		}
+	});
+	res.render('home', { confirmedUsers: confirmedUsers})
+})
 
 // Register Users Route
 app.get('/register', (req, res) => {

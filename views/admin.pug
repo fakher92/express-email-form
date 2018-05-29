@@ -12,6 +12,14 @@ html(lang='en')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
     // Custom styles for this template
   body.text-center
-    p=title
+  .card(style='max-width: 20rem;margin-top:2rem;')
+    // Card Header
+    .card-header
+      | Confirmed - Unconfirmed Users
+    // Card Block
+    .card-body
+      ul.list-group.list-group-flush
+        each users in confirmedUsers
+          li.list-group-item= users.email
     
-      p.mt-5.mb-3.text-muted © 2017-2018
+      
