@@ -34,8 +34,22 @@ app.get('/register', (req, res) => {
 
 // Admin Route
 app.get('/admin', (req, res) => {
-	res.render('admin', { title: 'Admin', message: 'Hello there!' })
-  })
+	console.log('rout /');
+	var arrayOfFiles = fs.readdirSync('./files/');
+	console.log(arrayOfFiles);
+	var confirmedUsers = [];
+  var unconfirmedUsers = [];
+	arrayOfFiles.forEach(file => {
+		var readFile = fs.readFileSync(`./files/${file}`);
+		let user = JSON.parse(readFile);
+		if(user.status == 'confirmed') {
+			confirmedUsers.push(user);
+		} else {
+        unconfirmedUsers.push(user);
+     }
+	});
+	res.render('admin', { confirmedUsers: confirmedUsers, unconfirmedUsers: unconfirmedUsers});
+})
 
 //==============
 app.get('/users/create', (req, res) => {
