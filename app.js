@@ -34,21 +34,31 @@ app.get('/register', (req, res) => {
 
 // Admin Route
 app.get('/admin', (req, res) => {
-	console.log('rout /');
+	//console.log('rout /');
 	var arrayOfFiles = fs.readdirSync('./files/');
-	console.log(arrayOfFiles);
+	//console.log(arrayOfFiles);
 	var confirmedUsers = [];
   var unconfirmedUsers = [];
 	arrayOfFiles.forEach(file => {
 		var readFile = fs.readFileSync(`./files/${file}`);
 		let user = JSON.parse(readFile);
+		//console.log(user.uuid);
 		if(user.status == 'confirmed') {
 			confirmedUsers.push(user);
 		} else {
         unconfirmedUsers.push(user);
      }
 	});
-	res.render('admin', { confirmedUsers: confirmedUsers, unconfirmedUsers: unconfirmedUsers});
+	//console.log("unconfirmed", unconfirmedUsers)
+	unconfirmedUsers.forEach(user => {
+		console.log("user id in unconfirmed array", user.uuid);
+		let userUuid = user.uuid;
+		res.render('admin', {
+			uuid: userUuid,
+			confirmedUsers: confirmedUsers,
+			unconfirmedUsers: unconfirmedUsers
+		});
+	})
 })
 
 //==============
@@ -94,11 +104,11 @@ app.get('/users/verify/:token', (req, res) => {
 					}
 					console.log("The email was confirmed!");
 					//redirect to /
-					res.redirect("/");
 				});
 			}
 		};
 	});
+	res.redirect("/");
 })
 
 // Start Server
