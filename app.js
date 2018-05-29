@@ -50,15 +50,17 @@ app.get('/admin', (req, res) => {
      }
 	});
 	//console.log("unconfirmed", unconfirmedUsers)
-	unconfirmedUsers.forEach(user => {
-		console.log("user id in unconfirmed array", user.uuid);
-		let userUuid = user.uuid;
-		res.render('admin', {
-			uuid: userUuid,
-			confirmedUsers: confirmedUsers,
-			unconfirmedUsers: unconfirmedUsers
-		});
-	})
+	// unconfirmedUsers.forEach(user => {
+	// 	console.log("user id in unconfirmed array", user.uuid);
+	// 	let userUuid = user.uuid;
+	// 	res.render('admin', {
+	// 		uuid: userUuid,
+	// 		confirmedUsers: confirmedUsers,
+	// 		unconfirmedUsers: unconfirmedUsers
+	// 	});
+	// })
+	res.render('admin', { confirmedUsers: confirmedUsers, unconfirmedUsers: unconfirmedUsers })
+
 })
 
 //==============
@@ -78,9 +80,8 @@ app.get('/users/create', (req, res) => {
 		if (err) {
 			return console.log(err);
 		}
-
 		console.log("The file was saved!");
-		res.redirect("/");
+		res.redirect("/admin");
 	});
 });
 
@@ -103,12 +104,12 @@ app.get('/users/verify/:token', (req, res) => {
 						return console.log(err);
 					}
 					console.log("The email was confirmed!");
-					//redirect to /
 				});
 			}
 		};
 	});
-	res.redirect("/");
+	//redirect to /admin
+	res.redirect("/admin");
 })
 
 // Start Server

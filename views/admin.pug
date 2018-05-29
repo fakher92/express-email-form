@@ -19,5 +19,5 @@ block content
 				ul.list-group.list-group-flush
 					each users in unconfirmedUsers
 						li.list-group-item= users.email
-						a.btn.btn-success(href='/users/verify/'+uuid) Verify  
+						a.btn.btn-success(href='/users/verify/'+users.uuid) Verify  
 			
