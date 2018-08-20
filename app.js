@@ -49,16 +49,6 @@ app.get('/admin', (req, res) => {
         unconfirmedUsers.push(user);
      }
 	});
-	//console.log("unconfirmed", unconfirmedUsers)
-	// unconfirmedUsers.forEach(user => {
-	// 	console.log("user id in unconfirmed array", user.uuid);
-	// 	let userUuid = user.uuid;
-	// 	res.render('admin', {
-	// 		uuid: userUuid,
-	// 		confirmedUsers: confirmedUsers,
-	// 		unconfirmedUsers: unconfirmedUsers
-	// 	});
-	// })
 	res.render('admin', { confirmedUsers: confirmedUsers, unconfirmedUsers: unconfirmedUsers })
 
 })
